@@ -1,0 +1,1 @@
+# mindar-congratulations-picture-demo
