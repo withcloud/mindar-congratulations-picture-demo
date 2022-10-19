@@ -10,6 +10,58 @@
   
   <body class="bg-blue-300">
 
+   <!-- 複製鏈接 -->
+  <div class="hidden" id="copyLink" style="">
+    <div class="relative z-10 " aria-labelledby="modal-title" role="dialog" aria-modal="true">
+     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <div class="fixed inset-0 z-10 overflow-y-auto" >
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+          <div style="background: green; color: white;" class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+            <div>
+              <h1 style="text-align: center; font-size: 20px; font-size: 24px;">地域科技</h1>
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 mt-4">
+                <img src="../logo.png" width="50px" height="50px" style="border-radius: 50%;" alt="" />
+              </div>
+              <div class="mt-3 text-center sm:mt-5 p-2">
+                <h3 class="text-lg font-medium leading-6 " id="modal-title">遊戲提示</h3>
+                <div class="mt-2">
+                  <p class="text-sm">請使用手機Chrome瀏覽器或手機原生瀏覽器打開，可複製網址並於瀏覽器中開啟</p>
+                </div>
+              </div>
+            </div>
+            <div style="  display: -webkit-box; display: -webkit-flex;  display: flex; justify-content: center; align-items: center; flex-direction: column;">
+              <input type="text" size="30" style=" width: 100%; border-radius: 4px; border: none; border-color: rgb(212, 203, 203); padding: 5px; outline: none; color: black;" id="copyUrl" value="">
+              <button type="button" style="border: none; background: none; margin-top: 20px; background: black; width: 50%; color: white; border-radius: 5px;" class="p-2 text-xl" onclick="document.getElementById('copyUrl').select();document.execCommand('Copy')">複製鏈接</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div> 
+  </div> 
+
+  <!-- 微信三點水提示 -->
+  <div class="hidden" id="wxTips" style="">
+    <div class="relative z-10 " aria-labelledby="modal-title" role="dialog" aria-modal="true">
+     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <div class="fixed inset-0 z-10 overflow-y-auto" >
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+          <div style="background: green; color: white;" class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+            <div>
+              <div class="mt-3 text-center sm:mt-5 p-2">
+                <h3 class="text-lg font-medium leading-6 " id="modal-title">遊戲提示</h3>
+                <div class="mt-2">
+                  <p class="text-sm">點擊右上角三個點，在下方選擇“在瀏覽器打開”，選擇chrome瀏覽器打開</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div> 
+  </div> 
+
     <!-- 模型加載 -->
     <a-scene
       mindar-image="imageTargetSrc: targets.mind; maxTrack: 1; filterMinCF:0.0001; filterBeta: 0.001;uiScanning:no"
@@ -32,5 +84,71 @@
       <!-- 使用相機 -->
       <a-camera position="0 0 0" look-controls="enabled: false"> </a-camera>
     </a-scene>
+
+    <script>
+      const browser = {
+          // 版本信息 
+          versions: function () {
+              var u = navigator.userAgent
+              var app = navigator.appVersion;
+              return {         //移动终端浏览器版本信息
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部  
+              };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase(),
+            // 打開對象
+            openObject:function(){
+              var ua = navigator.userAgent
+              var u = navigator.userAgent.toLowerCase();//获取判断用的对象
+              return {
+                  weixin:u.match(/MicroMessenger/i) == "micromessenger",
+                  qq:u.match(/QQ/i) == "qq",
+                  weibo:u.match(/WeiBo/i) == "weibo",
+                  alipay:/alipay/ig.test(u) ,
+                  dingtalk:u.indexOf('dingtalk') !== -1,
+                  chrome:u.indexOf("Chrome") > -1,
+                  isChrome : /(?:Chrome|CriOS)/.test(ua), 
+                  isSafari:/Safari/.test(ua),//蘋果內置瀏覽器  百度
+                  baidui:u.indexOf("baidu") > 0,
+                  ios :/iphone|ipod|ipad/.test(u)
+              }
+            }(),
+            
+        }
+
+        // ios history.go(-1)回退页面无效处理
+        window.addEventListener('pageshow',function(e){
+          $('#copyUrl').attr('value',window.location.origin)//可複製的網址
+          // 通过persisted属性判断是否存在 BF Cache
+          if(e.persisted){
+            location.reload();
+          }
+          $('#wxTips').css('display','none')
+          $('#copyLink').css('display','none')
+          // 移動端
+          if(/Android|Adr|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+              //非ios處理  chrome  safari weixin
+              if(browser.versions.mobile){
+                  if(browser.openObject.weixin){
+                    $('#wxTips').css('display','block')
+                  } else if(browser.openObject.dingtalk||browser.openObject.qq||browser.openObject.baidui){
+                    $('#copyLink').css('display','block')
+                  }
+              }
+          }else{
+            // pc端
+              $('#copyLink').css('display','block')
+          }
+        });
+  </script>
   </body>
 </html>
