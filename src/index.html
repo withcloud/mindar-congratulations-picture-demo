@@ -12,7 +12,7 @@
 
     <!-- 模型加載 -->
     <a-scene
-      mindar-image="imageTargetSrc: targets.mind; maxTrack: 1; filterMinCF:0.0001; filterBeta: 0.001;uiScanning:no"
+      mindar-image="imageTargetSrc: targets.mind; maxTrack: 4; filterMinCF:0.0001; filterBeta: 0.001;uiScanning:no"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -21,12 +21,39 @@
 
       <!-- 掃描marker -->
       <a-assets>
-        <img id="img" src="./images/1.png" />
+        <img id="CraniumFish" src="images/Cranium Fish.jpeg" />
+        <a-asset-item id="CraniumFishModel" src="model/fish.glb"></a-asset-item>
+  
+        <img id="MorphingJar" src="images/Morphing Jar.png" />
+        <a-asset-item id="MorphingJarModel" src="model/Morphing Jar.glb"></a-asset-item>
+  
+        <img id="PotOfGreed" src="images/Pot Of Greed.png" />
+        <a-asset-item id="PotOfGreedModel" src="model/Pot Of Greed.glb"></a-asset-item>
+  
+        <img id="TimeWizard" src="images/Time Wizard.png" />
+        <a-asset-item id="TimeWizardModel" src="model/Time Wizard.glb"></a-asset-item>
       </a-assets>
 
       <!-- 顯示內容 -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane src="#img" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-plane>
+        <a-plane src="#CraniumFish" position="0 0 0" height="1.458" width="1" rotation="0 0 0"></a-plane>
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.5 0.5 0.5" src="#CraniumFishModel"
+          animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-plane src="#MorphingJar" position="0 0 0" height="1.458" width="1" rotation="0 0 0"></a-plane>
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.5 0.5 0.5" src="#MorphingJarModel"
+          animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-plane src="#PotOfGreed" position="0 0 0" height="1.458" width="1" rotation="0 0 0"></a-plane>
+        <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.5 0.5 0.5" src="#PotOfGreedModel"
+          animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-plane src="#TimeWizard" position="0 0 0" height="1.458" width="1" rotation="0 0 0"></a-plane>
+        <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.5 0.5 0.5" src="#TimeWizardModel"
+          animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
       </a-entity>
 
       <!-- 使用相機 -->
