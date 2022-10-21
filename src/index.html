@@ -59,9 +59,9 @@
         // volume: 0.5,// 音量0-1
         // rate: 1,//播放速度 0.5 - 4
         });
-        backgroundSound.load();
         $("#startMusic").click(function() {
           backgroundSound.unload();//先卸載原來的聲音
+          backgroundSound.mute(false);// 开启声音
           backgroundSound.play();//重新播放
         });
      
