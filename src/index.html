@@ -9,6 +9,19 @@
   </head>
   
   <body class="bg-blue-300">
+    <div id="start" class="">
+      <div  style=" position: absolute; top: 0; left: 0; right: 0;  bottom: 0; display: flex;  justify-content: center; align-items: center; z-index:10000;">
+        <div style="width:300px;  border-radius: 10px; background: green; color: white; ">
+          <div style=" margin: 10px;">
+            <h1 style="text-align: center;" class="text-xl">音樂播放</h1>
+            <p style="padding: 5px; text-indent: 15; line-height: 20px; font-size: 16px;">音樂簡介，一首過年喜慶音樂</p>
+            <div style="display: flex; justify-content: space-around;">
+              <button type="button" style="border: none; background: black;" class="px-2 py-1 rounded-md" id="startMusic">確定</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
 
     <!-- 模型加載 -->
     <a-scene
@@ -32,5 +45,26 @@
       <!-- 使用相機 -->
       <a-camera position="0 0 0" look-controls="enabled: false"> </a-camera>
     </a-scene>
+
+    <script type="module">
+       import {Howl, Howler} from 'howler';
+        // 定義音樂
+        var backgroundSound = new Howl({
+          src: ["backgroundMusic.mp3"],
+          loop:true,
+          html5 : true, // 流式音频（用于实时音频或大文件）边加载边播放，不需要全部加载才播放
+        // autoplay: false,// 自动播放
+        // loop: false,// 循环
+        // preload: true,// 预加载
+        // volume: 0.5,// 音量0-1
+        // rate: 1,//播放速度 0.5 - 4
+        });
+        backgroundSound.load();
+        $("#startMusic").click(function() {
+          backgroundSound.unload();//先卸載原來的聲音
+          backgroundSound.play();//重新播放
+        });
+     
+    </script>
   </body>
 </html>
