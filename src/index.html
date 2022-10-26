@@ -6,31 +6,14 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script type="module" src="mindar-image-aframe.prod.js"></script>
     <script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
-
-    <style>
-
-  </style>
   </head>
   
   <body class="bg-blue-300">
-    <div id="example-scanning-overlay" class="hidden">
-      <div class="inner">
-      <img src="images/1.png"/>
-      <div class="scanline"></div>
-          </div>
-    </div>
+
     <!-- 模型加載 -->
-    <!--
-      filterMinCF 减小的值 可以减少抖动
-      filterBeta 增加 的值 可以减少延迟
-      warmupTolerance  检测到目标图像才能被认为是成功  默认值为warmupTolerance 5
-      missTolerance 未检测到目标图像 默认值为missTolerance5
-      -->
-      <!-- uiScanning:#scanning; -->
     <a-scene
-      mindar-image="uiScanning:#example-scanning-overlay;imageTargetSrc: targets.mind; maxTrack: 1; filterMinCF:0.0001; filterBeta: 0.001; warmupTolerance:1; missTolerance:1 "
+      mindar-image="imageTargetSrc: targets.mind; maxTrack: 1; filterMinCF:0.0001; filterBeta: 0.001;uiScanning:no"
       color-space="sRGB"
-      uiScanning="#scanning" 
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
