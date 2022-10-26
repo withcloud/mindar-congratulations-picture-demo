@@ -6,37 +6,27 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script type="module" src="mindar-image-aframe.prod.js"></script>
     <script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
-
     <style>
-
-      #example-scanning-overlay {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            background: transparent;
-            z-index: 2;
-          }
-          #example-scanning-overlay.hidden {
-                display: none;
-          }
+     
   </style>
   </head>
   
   <body class="bg-blue-300">
-    <div id="example-scanning-overlay" class="hidden">
-      <div>
-        <h1>错误提示</h1>
+    <div class="mindar-ui-overlay mindar-ui-compatibility"> 
+      <div class="content">
+         <h1>未能啟動 :
+         <p> 看起來你的設備瀏覽器不兼容. </p> 
+         <br>
+         <br> 
+        <p> 請嘗試有以下推薦的瀏覽器: </p> 
+        <p> 適用與android設備的 - Chrome </p> 
+        <p> 適用與ios設備的 - Safari </p>
+       </div> 
       </div>
-     </div>
 
     <!-- 模型加載 -->
     <a-scene
-      mindar-image="uiError: #example-scanning-overlay;imageTargetSrc: targets.mind; maxTrack: 1; filterMinCF:0.0001; filterBeta: 0.001;warmupTolerance:1; missTolerance:0"
+      mindar-image="uiError: #mindar-ui-overlay;uiLoading:no;uiScanning:no;imageTargetSrc: targets.mind; maxTrack: 1; filterMinCF:0.0001; filterBeta: 0.001;warmupTolerance:1; missTolerance:0"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
