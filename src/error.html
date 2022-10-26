@@ -6,22 +6,45 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script type="module" src="mindar-image-aframe.prod.js"></script>
     <script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+
+    <style>
+
+      #example-scanning-overlay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: transparent;
+            z-index: 2;
+          }
+          #example-scanning-overlay.hidden {
+                display: none;
+          }
+  </style>
   </head>
   
   <body class="bg-blue-300">
-    <div id="example-scanning-overlay"  style="display: none;">
-      <div style="color: red;">你好 世界</div>
-    </div>
+    <div id="example-scanning-overlay" class="hidden">
+      <div>
+        <h1>错误提示</h1>
+      </div>
+     </div>
 
     <!-- 模型加載 -->
     <a-scene
-      mindar-image="imageTargetSrc: targets.mind; maxTrack: 1; filterMinCF:0.0001; filterBeta: 0.001;uiError:#example-scanning-overlay"
+      mindar-image="uiError: #example-scanning-overlay;imageTargetSrc: targets.mind; maxTrack: 1; filterMinCF:0.0001; filterBeta: 0.001;warmupTolerance:1; missTolerance:0"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
+      keyboard-shortcuts
+      screenshot
+      inspector
     >
-    
       <!-- 掃描marker -->
       <a-assets>
         <img id="img" src="./images/1.png" />
