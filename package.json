@@ -2,7 +2,7 @@
   "name": "togather-ar-game",
   "version": "1.0.0",
   "private": true,
-  "source": "src/index.html",
+  "source": "src/ui.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel --https",
